@@ -22,3 +22,10 @@ variable "admin_password" {
   description = "The password of the administrator user"
   default     = "NoDificil89!"
 }
+
+variable "vm_size" {
+  description = "The password of the administrator user"
+  default     = "Standard_D2S_v3"
+  
+}
+

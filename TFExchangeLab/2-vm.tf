@@ -4,7 +4,7 @@ resource "azurerm_virtual_machine" "webdmz" {
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   primary_network_interface_id = "${element(azurerm_network_interface.dmz.*.id, count.index)}"
   network_interface_ids        = ["${element(azurerm_network_interface.dmz.*.id, count.index)}", "${element(azurerm_network_interface.dmzlan.*.id, count.index)}"]
-  vm_size                      = "Standard_DS1_v2"
+  vm_size                      = "${var.vm_size}"
   count                        = 2
 
   os_profile_windows_config {
@@ -43,7 +43,7 @@ resource "azurerm_virtual_machine" "exc" {
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${element(azurerm_network_interface.lanexc.*.id, count.index)}"]
-  vm_size               = "Standard_D2S_v3"
+  vm_size               = "${var.vm_size}"
   count                 = 2
 
   os_profile_windows_config {
@@ -82,7 +82,7 @@ resource "azurerm_virtual_machine" "dcs" {
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${element(azurerm_network_interface.landcs.*.id, count.index)}"]
-  vm_size               = "Standard_DS1_v2"
+  vm_size               = "${var.vm_size}"
   count                 = 2
 
   os_profile_windows_config {
