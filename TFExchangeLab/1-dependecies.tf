@@ -3,7 +3,7 @@ provider "azurerm" {}
 
 # Create a resource group
 resource "azurerm_resource_group" "rg" {
-  name     = "${var.prefix}-rg"
+  name     = "${var.resourcegroup}"
   location = "${var.location}"
 }
 
