@@ -32,4 +32,9 @@ variable "vm_size" {
   default     = "Standard_D2S_v3"
   
 }
+variable "vm_mailbox_size" {
+  description = "The password of the administrator user"
+  default     = "Standard_A2m_v2"
+  
+}
 

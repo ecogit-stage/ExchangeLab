@@ -43,7 +43,7 @@ resource "azurerm_virtual_machine" "exc" {
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${element(azurerm_network_interface.lanexc.*.id, count.index)}"]
-  vm_size               = "${var.vm_size}"
+  vm_size               = "${var.vm_mailbox_size}"
   count                 = 2
 
   os_profile_windows_config {
