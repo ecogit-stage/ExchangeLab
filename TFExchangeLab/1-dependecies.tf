@@ -37,6 +37,37 @@ resource "azurerm_public_ip" "dmz" {
   count               = 2
 }
 
+# Availability sets
+
+resource "azurerm_availability_set" "exchange" {
+  name = "${var.prefix}-exchange-as"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  location = "${azurerm_resource_group.rg.location}"
+  platform_update_domain_count = 2
+  platform_fault_domain_count = 2
+  managed = "true"
+  
+}
+resource "azurerm_availability_set" "domaincontroller" {
+  name = "${var.prefix}-dc-as"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  location = "${azurerm_resource_group.rg.location}"
+  platform_update_domain_count = 2
+  platform_fault_domain_count = 2
+  managed = "true"
+  
+}
+resource "azurerm_availability_set" "dmz" {
+  name = "${var.prefix}-dmz-as"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  location = "${azurerm_resource_group.rg.location}"
+  platform_update_domain_count = 2
+  platform_fault_domain_count = 2
+  managed = "true"
+  
+}
+
+
 # Create a Network Security Group with some rules
 resource "azurerm_network_security_group" "dmz" {
   name                = "${var.prefix}-dmz${count.index+1}-nsg"

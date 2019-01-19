@@ -6,6 +6,7 @@ resource "azurerm_virtual_machine" "webdmz" {
   network_interface_ids        = ["${element(azurerm_network_interface.dmz.*.id, count.index)}", "${element(azurerm_network_interface.dmzlan.*.id, count.index)}"]
   vm_size                      = "${var.vm_size}"
   count                        = 2
+  availability_set_id = "${azurerm_availability_set.dmz.id}"
 
   os_profile_windows_config {
     enable_automatic_upgrades = false
@@ -45,6 +46,7 @@ resource "azurerm_virtual_machine" "exc" {
   network_interface_ids = ["${element(azurerm_network_interface.lanexc.*.id, count.index)}"]
   vm_size               = "${var.vm_mailbox_size}"
   count                 = 2
+  availability_set_id = "${azurerm_availability_set.exchange.id}"
 
   os_profile_windows_config {
     enable_automatic_upgrades = false
@@ -84,6 +86,7 @@ resource "azurerm_virtual_machine" "dcs" {
   network_interface_ids = ["${element(azurerm_network_interface.landcs.*.id, count.index)}"]
   vm_size               = "${var.vm_size}"
   count                 = 2
+  availability_set_id = "${azurerm_availability_set.domaincontroller.id}"
 
   os_profile_windows_config {
     enable_automatic_upgrades = false
